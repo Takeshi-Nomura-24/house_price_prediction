@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block main %}
+<div class='container mt-5'>
+    <div class='row align-items-center'>
+        <div class='col text-center'>
+            <img src='{% static 'house1.jpeg' %}' class='img-fluid' width=500px>
+        </div>
+        <div class='col text-center'>
+            <h1  class='blink'>${{ result|intcomma }}</h1>
+        </div>
+        <div class='col text-center'>
+            <img src='{% static 'house2.jpeg' %}' class='img-fluid' width=500px>
+        </div>
+    </div>
+</div>
+
+<div class='d-grid gap-2 col-6 mx-auto my-5'>
+    <a class='btn btn-outline-primary' href='{% url 'predict:predict' %}'>再度価格予測を行う</a>
+</div>
+{% endblock %}

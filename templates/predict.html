@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<div class='container mt-1 text-center'>
+    <h1>下記に説明変数を入力して予測実行ボタンを押して下さい</h1>
+</div>
+<div class='container mb-1'>
+    <div class='row justify-content-center rounded'>
+    <div class='col-10 bg-primary text-white p-2'>
+        <form action='{% url 'predict:result' %}' id='post-form'>
+            {% csrf_token %}
+            <div class='form-group m-2'>
+                <label for='n1'>平均地域所得:</label>
+                <input type='number' step='10000' required name='n1' id='n1' class='form-control' placeholder='例：50000ドル' required>
+            </div>
+            <div class='form-group m-2'>
+                <label for='n2'>平均築年数:</label>
+                <input type='number' step='1' required name='n2' id='n2' class='form-control' placeholder='例：7年' required>
+            </div>
+            <div class='form-group m-2'>
+                <label for='n3'>1戸あたり平均部屋数:</label>
+                <input type='number' step='1' required name='n3' id='n3' class='form-control' placeholder='例：5部屋' required>
+            </div>
+            <div class='form-group m-2'>
+                <label for='n4'>1戸あたり寝室数:</label>
+                <input type='number' step='1' required name='n4' id='n4' class='form-control' placeholder='例：3部屋' required>
+            </div>
+            <div class='form-group m-2'>
+                <label for='n5'>地域人口:</label>
+                <input type='number' step='10000' required name='n5' id='n5' class='form-control' placeholder='例：20000人' required>
+            </div>
+            
+            <div class='form-group m-2'>
+                <button type='submit' class='btn btn-warning'>予測実行</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

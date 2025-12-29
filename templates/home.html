@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<div class='container'>
+    <div class='bg-light p-3 p-sm-3 my-2 rounded'>
+      <h1 class='display-4'><strong>米国住宅価格予測</strong></h1>
+      <p class='lead'>米国の地域ごとの住宅に関する説明変数を入力し、平均住宅価格を推測するためのアプリです。</p>
+      <hr class='my-4'>
+      <ul>
+        <li>予測実行フォームに必要パラーメータを入力して推測を実行してください。</li>
+        <li>平均地域所得、平均築年数、1戸あたり平均部屋数、1戸あたり寝室数、地域人口から住宅価格を予測します。</th>
+      </ul>
+      <div class='d-grid gap-2 col-6 mx-auto'>
+        <a class='btn btn-outline-primary' href="{% url 'predict:predict' %}">価格予測を行う</a>
+      </div>
+    </div>
+</div>
+
+<div class='container'>
+    <div class='mb-2'>
+    <div class='row align-items-center'>
+        <div class='col text-center'>
+            <img src="{% static 'city.jpeg'%}" class='img-fluid' width=300px>
+        </div>
+        <div class='col text-center'>
+            <img src="{% static 'residential.jpeg'%}" class='img-fluid' width=300px>
+        </div>
+        <div class='col text-center'>
+            <img src="{% static 'rural.jpeg'%}" class='img-fluid' width=300px>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

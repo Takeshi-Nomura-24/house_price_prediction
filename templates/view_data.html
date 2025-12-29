@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <div class='container pt-5'>
+        <div class='row'>
+
+        <h1>住宅価格予測結果一覧</h1>
+
+            <table class='table table-info table-striped'>
+                <thead align='center'>
+                <tr>
+                <th scope='col'>試行</th>
+                <th scope='col'>平均地域所得</th>
+                <th scope='col'>平均築年数</th>
+                <th scope='col'>1戸あたり平均部屋数</th>
+                <th scope='col'>1戸あたり寝室数</th>
+                <th scope='col'>地域人口</th>
+                <th scope='col'>予測住宅価格</th>
+                </tr>
+                </thead>
+                <tbody align='center'>
+                {% for data in dataset %}
+                    <tr>
+                    <th scope='row'>{{ data.id }}</th>
+                    <td>{{ data.Income }}</td>
+                    <td>{{ data.Age }}</td>
+                    <td>{{ data.Room }}</td>
+                    <td>{{ data.Bedroom }}</td>
+                    <td>{{ data.Population }}</td>
+                    <td>{{ data.Price  }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
