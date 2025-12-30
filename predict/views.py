@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import numpy as np
-import pandas as pd
+# import pandas as pd
 # import matplotlib.pyplot as plt
 # import seaborn as sns
 from sklearn.model_selection import train_test_split
@@ -18,7 +18,8 @@ def predict(request):
     return render(request, 'predict.html')
 
 def result(request):
-    model = pd.read_pickle("house_price_prediction_pdtopickle.pickle")
+    # model = pd.read_pickle("house_price_prediction_pdtopickle.pickle")
+    model = joblib.load("house_price_prediction_joblib.pkl")
     
     var1 = float(request.GET['n1'])
     var2 = float(request.GET['n2'])
