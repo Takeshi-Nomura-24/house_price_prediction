@@ -28,10 +28,10 @@ SECRET_KEY = 'django-insecure-c90fe)5=lf(qjjt$j+_c8ug+5$=(g&1mshz#)hq$b8se)bfefe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = [
-#     "house-price-prediction-unuq.onrender.com",
-# ]
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "house-price-prediction-unuq.onrender.com",
+]
 
 # Application definition
 
