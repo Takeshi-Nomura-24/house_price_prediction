@@ -1,34 +1,74 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}ホーム - 米国住宅価格予測AI{% endblock %}
+
 {% block main %}
-<div class='container'>
-    <div class='bg-light p-3 p-sm-3 my-2 rounded'>
-      <h1 class='display-4'><strong>米国住宅価格予測</strong></h1>
-      <p class='lead'>米国の地域ごとの住宅に関する説明変数を入力し、平均住宅価格を推測するためのアプリです。</p>
-      <hr class='my-4'>
-      <ul>
-        <li>予測実行フォームに必要パラーメータを入力して推測を実行してください。</li>
-        <li>平均地域所得、平均築年数、1戸あたり平均部屋数、1戸あたり寝室数、地域人口から住宅価格を予測します。</th>
-      </ul>
-      <div class='d-grid gap-2 col-6 mx-auto'>
-        <a class='btn btn-outline-primary' href="{% url 'predict:predict' %}">価格予測を行う</a>
-      </div>
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="glass-container mb-5">
+            <h1 class="display-4 text-primary"><strong>米国住宅価格AI鑑定</strong></h1>
+            <p class="lead">高度な機械学習モデルを用いて、米国の地域特性から住宅価格の適正値を瞬時に推定します。</p>
+            
+            <hr class="my-4">
+            
+            <div class="row">
+                <div class="col-md-7">
+                    <h5 class="mb-3"><i class="bi bi-info-circle-fill"></i> 推定に使用するパラメータ</h5>
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item bg-transparent">💰 <strong>平均地域所得</strong>：その地域の経済水準</li>
+                        <li class="list-group-item bg-transparent">🏠 <strong>平均築年数</strong>：建物の経年劣化と資産価値</li>
+                        <li class="list-group-item bg-transparent">🛋️ <strong>部屋数・寝室数</strong>：居住空間の広さと利便性</li>
+                        <li class="list-group-item bg-transparent">👨‍👩‍👧‍👦 <strong>地域人口</strong>：需要と供給のバランス</li>
+                    </ul>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <a class="btn btn-primary btn-lg shadow-sm px-5 py-3 mb-3" href="{% url 'predict:predict' %}">
+                            価格鑑定を始める
+                        </a>
+                        <p class="text-muted small">※ 統計データに基づく概算値です</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class='container'>
-    <div class='mb-2'>
-    <div class='row align-items-center'>
-        <div class='col text-center'>
-            <img src="{% static 'city.jpeg'%}" class='img-fluid' width=300px>
-        </div>
-        <div class='col text-center'>
-            <img src="{% static 'residential.jpeg'%}" class='img-fluid' width=300px>
-        </div>
-        <div class='col text-center'>
-            <img src="{% static 'rural.jpeg'%}" class='img-fluid' width=300px>
+<div class="row g-4 justify-content-center mb-5">
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+            <img src="{% static 'city.jpeg' %}" class="card-img-top hover-zoom" alt="City" style="height: 200px; object-fit: cover;">
+            <div class="card-body text-center bg-dark text-white p-2">
+                <small>都市部 / City</small>
+            </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+            <img src="{% static 'residential.jpeg' %}" class="card-img-top hover-zoom" alt="Residential" style="height: 200px; object-fit: cover;">
+            <div class="card-body text-center bg-dark text-white p-2">
+                <small>住宅街 / Residential</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+            <img src="{% static 'rural.jpeg' %}" class="card-img-top hover-zoom" alt="Rural" style="height: 200px; object-fit: cover;">
+            <div class="card-body text-center bg-dark text-white p-2">
+                <small>郊外 / Rural</small>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    /* 画像にマウスを乗せた時のアニメーション */
+    .hover-zoom {
+        transition: transform .5s ease;
+    }
+    .hover-zoom:hover {
+        transform: scale(1.1);
+    }
+</style>
 {% endblock %}

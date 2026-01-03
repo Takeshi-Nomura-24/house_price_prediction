@@ -1,22 +1,105 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
+
+{% block title %}鑑定結果 - 米国住宅価格予測AI{% endblock %}
+
 {% block main %}
-<div class='container mt-5'>
-    <div class='row align-items-center'>
-        <div class='col text-center'>
-            <img src='{% static 'house1.jpeg' %}' class='img-fluid' width=500px>
-        </div>
-        <div class='col text-center'>
-            <h1  class='blink'>${{ result|intcomma }}</h1>
-        </div>
-        <div class='col text-center'>
-            <img src='{% static 'house2.jpeg' %}' class='img-fluid' width=500px>
+<div class="row justify-content-center animate__animated animate__fadeIn">
+    <div class="col-lg-10 col-xl-9">
+        <div class="glass-container shadow-lg">
+            
+            <div class="text-center mb-5">
+                <h2 class="text-primary fw-bold">AI鑑定結果レポート</h2>
+                <p class="text-muted">Market Value Estimation Report</p>
+            </div>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-md-3 d-none d-md-block text-center">
+                    <img src="{% static 'house1.jpeg' %}" class="img-fluid rounded-4 shadow-sm border border-white border-4 result-img" alt="House 1">
+                </div>
+                
+                <div class="col-md-6 text-center">
+                    <div class="prediction-card p-5 bg-white rounded-4 shadow-sm border border-primary border-2 position-relative overflow-hidden">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon bg-primary text-white">SUCCESS</div>
+                        </div>
+                        <p class="text-muted mb-2 fw-bold letter-spacing-1">推定市場価格</p>
+                        <h1 class="display-2 fw-bold text-dark mb-0 price-text">
+                            <span class="currency text-primary">$</span><span class="blink">{{ result|intcomma }}</span>
+                        </h1>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 d-none d-md-block text-center">
+                    <img src="{% static 'house2.jpeg' %}" class="img-fluid rounded-4 shadow-sm border border-white border-4 result-img" alt="House 2">
+                </div>
+            </div>
+
+            <div class="bg-light rounded-3 p-4 mb-5">
+                <div class="row text-center g-3">
+                    <div class="col-4 col-md-2">
+                        <div class="small text-muted">所得</div>
+                        <div class="fw-bold">${{ input_data.n1|intcomma }}</div>
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <div class="small text-muted">築年数</div>
+                        <div class="fw-bold">{{ input_data.n2 }}年</div>
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <div class="small text-muted">部屋数</div>
+                        <div class="fw-bold">{{ input_data.n3 }}室</div>
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <div class="small text-muted">寝室数</div>
+                        <div class="fw-bold">{{ input_data.n4 }}室</div>
+                    </div>
+                    <div class="col-4 col-md-4 border-start border-2 d-none d-md-block">
+                        <div class="small text-muted">地域人口</div>
+                        <div class="fw-bold">{{ input_data.n5|intcomma }}人</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-primary btn-lg px-5 shadow rounded-pill fw-bold" href="{% url 'predict:predict' %}">
+                    <i class="bi bi-arrow-left-circle me-2"></i>再度鑑定する
+                </a>
+                <a class="btn btn-outline-dark btn-lg px-5 rounded-pill fw-bold" href="{% url 'predict:view_data' %}">
+                    <i class="bi bi-list-check me-2"></i>過去の鑑定結果
+                </a>
+            </div>
+
         </div>
     </div>
 </div>
 
-<div class='d-grid gap-2 col-6 mx-auto my-5'>
-    <a class='btn btn-outline-primary' href='{% url 'predict:predict' %}'>再度価格予測を行う</a>
-</div>
+<style>
+    /* 追加の洗練スタイル */
+    .prediction-card {
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    }
+    .letter-spacing-1 { letter-spacing: 1px; }
+    .price-text { letter-spacing: -2px; }
+    .currency { font-size: 2rem; vertical-align: super; margin-right: 5px; }
+
+    /* 数字の点滅アニメーション */
+    .blink { animation: blinking 2.5s ease-in-out infinite alternate; }
+    @keyframes blinking {
+        0% { color: #0d6efd; filter: drop-shadow(0 0 2px rgba(13,110,253,0.3)); }
+        100% { color: #212529; filter: drop-shadow(0 0 0px transparent); }
+    }
+
+    /* 画像の浮遊感 */
+    .result-img { transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .result-img:hover { transform: translateY(-10px) rotate(2deg); }
+
+    /* 簡易リボン */
+    .ribbon-wrapper { position: absolute; top: 0; right: 0; width: 85px; height: 85px; overflow: hidden; }
+    .ribbon {
+        font-size: 10px; font-weight: bold; text-align: center;
+        transform: rotate(45deg); position: relative; padding: 7px 0;
+        left: -5px; top: 15px; width: 120px;
+    }
+</style>
 {% endblock %}
